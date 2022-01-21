@@ -50,6 +50,7 @@ namespace TimerNoot {
 	private: System::Windows::Forms::Label^ lblHours;
 	private: System::Windows::Forms::Button^ btnStart;
 	private: System::Windows::Forms::Button^ btnRest;
+	private: System::Windows::Forms::Timer^ TimerH;
 
 
 
@@ -80,6 +81,7 @@ namespace TimerNoot {
 			this->lblHours = (gcnew System::Windows::Forms::Label());
 			this->btnStart = (gcnew System::Windows::Forms::Button());
 			this->btnRest = (gcnew System::Windows::Forms::Button());
+			this->TimerH = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
 			// 
 			// TimerSec
@@ -177,6 +179,11 @@ namespace TimerNoot {
 			this->btnRest->UseVisualStyleBackColor = true;
 			this->btnRest->Click += gcnew System::EventHandler(this, &MyForm::btnRest_Click);
 			// 
+			// TimerH
+			// 
+			this->TimerH->Interval = 3600000;
+			this->TimerH->Tick += gcnew System::EventHandler(this, &MyForm::TimerH_Tick);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -202,7 +209,9 @@ namespace TimerNoot {
 #pragma endregion
 	int TimerCounterS,TCounterRestS;
 	int TimerCounterM,TCounterRestM;
+	int TimerCounterH,TCounterRestH;
 	
+
 	private: System::Void btnExit_Click(System::Object^ sender, System::EventArgs^ e) {
 		exit(0);
 	}
@@ -212,27 +221,32 @@ namespace TimerNoot {
 		
 		TimerCounterS = 0;
 		TimerCounterM = 0;
+		TimerCounterH = 0;
+
 		TCounterRestS = 0; // —чтечик отдыха устанволенн
 		TCounterRestM = 0; // —чтечик отдыха устанволенн
 
 		lblMinute->Text = "00";
 		lblSecond->Text = "00";
+		lblHours->Text = "00";
+
 
 		TimerSec->Enabled = false;
 		TimerMin->Enabled = false;
+		TimerH->Enabled = false;
 
 		TimerSec->Interval = 1000;
 		TimerMin->Interval = 60000;
+		TimerH->Interval = 3600000;
+		
 	}
 	private: System::Void TimerSec_Tick(System::Object^ sender, System::EventArgs^ e) {
-		
-		
-
-		
+		TimerCounterS++;
+		lblSecond->Text = "00";
 		if (TimerCounterS == 60)
 		{
 			TimerCounterS = 0;
-			lblSecond->Text ="0" + TimerCounterS.ToString();
+			lblSecond->Text = "00";// + TimerCounterS.ToString();
 		}
 		else
 		{
@@ -246,7 +260,7 @@ namespace TimerNoot {
 			TimerCounterS = 0;
 			TimerSec->Enabled = false;
 		}
-		TimerCounterS++;
+
 		
 	}
 	private: System::Void TimerMin_Tick(System::Object^ sender, System::EventArgs^ e) {
@@ -282,11 +296,14 @@ private: System::Void btnStart_Click_1(System::Object^ sender, System::EventArgs
 	
 	TimerCounterS = 0;
 	TimerCounterM = 0;
+	TimerCounterH = 0;
+
 	TCounterRestM = 0;
 	TCounterRestS = 0;
 
 	lblMinute->Text = "00"; // —брасываем минуты на ноль
 	lblSecond->Text = "00"; // —брасываем секунды на ноль
+	lblHours->Text = "00";
 
 }
 
@@ -303,6 +320,23 @@ private: System::Void btnRest_Click(System::Object^ sender, System::EventArgs^ e
 	lblSecond->Text = "00"; // —брасываем секунды на ноль
 	
 	
+}
+private: System::Void TimerH_Tick(System::Object^ sender, System::EventArgs^ e) {
+
+	TimerCounterH++;
+
+	if (TimerCounterH == 24)
+	{
+		TimerCounterH = 0;
+		lblHours ->Text = "0" + TimerCounterH.ToString();
+	}
+	else
+	{
+		(TimerCounterH < 10) ? lblHours->Text = "0" + TimerCounterH.ToString() : lblHours ->Text = TimerCounterH.ToString();
+	}
+
+
+
 }
 };
 }
