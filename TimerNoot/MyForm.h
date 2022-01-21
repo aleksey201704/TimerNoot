@@ -39,8 +39,10 @@ namespace TimerNoot {
 	private: System::Windows::Forms::Timer^ timer1;
 	protected:
 	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ lblSecond;
+	private: System::Windows::Forms::Label^ lblMinute;
+
+
 	private: System::Windows::Forms::Timer^ timer2;
 	private: System::ComponentModel::IContainer^ components;
 
@@ -60,8 +62,8 @@ namespace TimerNoot {
 			this->components = (gcnew System::ComponentModel::Container());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->lblSecond = (gcnew System::Windows::Forms::Label());
+			this->lblMinute = (gcnew System::Windows::Forms::Label());
 			this->timer2 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
 			// 
@@ -80,27 +82,27 @@ namespace TimerNoot {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
-			// label1
+			// lblSecond
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->lblSecond->AutoSize = true;
+			this->lblSecond->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(272, 19);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(70, 25);
-			this->label1->TabIndex = 1;
-			this->label1->Text = L"label1";
+			this->lblSecond->Location = System::Drawing::Point(272, 19);
+			this->lblSecond->Name = L"lblSecond";
+			this->lblSecond->Size = System::Drawing::Size(70, 25);
+			this->lblSecond->TabIndex = 1;
+			this->lblSecond->Text = L"lblSecond";
 			// 
-			// label2
+			// lblMinute
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->lblMinute->AutoSize = true;
+			this->lblMinute->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label2->Location = System::Drawing::Point(196, 19);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(70, 25);
-			this->label2->TabIndex = 2;
-			this->label2->Text = L"label2";
+			this->lblMinute->Location = System::Drawing::Point(196, 19);
+			this->lblMinute->Name = L"lblMinute";
+			this->lblMinute->Size = System::Drawing::Size(70, 25);
+			this->lblMinute->TabIndex = 2;
+			this->lblMinute->Text = L"lblMinute";
 			// 
 			// timer2
 			// 
@@ -114,8 +116,8 @@ namespace TimerNoot {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Info;
 			this->ClientSize = System::Drawing::Size(512, 422);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->lblMinute);
+			this->Controls->Add(this->lblSecond);
 			this->Controls->Add(this->button1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"MyForm";
@@ -134,20 +136,23 @@ namespace TimerNoot {
 	}
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		TimerCounterS = 0;
+		TimerCounterM = 0;
+
+		lblMinute->Text = "00";
+		lblSecond->Text = "00";
+
 		timer1->Enabled = true;
 		timer1->Interval = 1000;
-
-		label1->Text = timer1->ToString();
 	}
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
 		
 		TimerCounterS++;
-		label1->Text = "0";
-		label1->Text = TimerCounterS.ToString();
+		lblSecond->Text = "0";
+		lblSecond->Text = "0"+TimerCounterS.ToString();
 	}
 	private: System::Void timer2_Tick(System::Object^ sender, System::EventArgs^ e) {
 		TimerCounterM = 0;
-		label2->Text = "00";
+		lblMinute->Text = "00";
 
 	}
 };
