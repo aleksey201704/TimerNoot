@@ -89,20 +89,20 @@ namespace TimerNoot {
 				static_cast<System::Byte>(204)));
 			this->lblSecond->Location = System::Drawing::Point(272, 19);
 			this->lblSecond->Name = L"lblSecond";
-			this->lblSecond->Size = System::Drawing::Size(70, 25);
+			this->lblSecond->Size = System::Drawing::Size(36, 25);
 			this->lblSecond->TabIndex = 1;
-			this->lblSecond->Text = L"lblSecond";
+			this->lblSecond->Text = L"00";
 			// 
 			// lblMinute
 			// 
 			this->lblMinute->AutoSize = true;
 			this->lblMinute->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblMinute->Location = System::Drawing::Point(196, 19);
+			this->lblMinute->Location = System::Drawing::Point(230, 19);
 			this->lblMinute->Name = L"lblMinute";
-			this->lblMinute->Size = System::Drawing::Size(70, 25);
+			this->lblMinute->Size = System::Drawing::Size(36, 25);
 			this->lblMinute->TabIndex = 2;
-			this->lblMinute->Text = L"lblMinute";
+			this->lblMinute->Text = L"00";
 			// 
 			// timer2
 			// 
