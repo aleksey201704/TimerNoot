@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include<iostream>
 #include <stdlib.h>
 
@@ -44,13 +44,14 @@ namespace TimerNoot {
 
 	private: System::Windows::Forms::Label^ lblSecond;
 	private: System::Windows::Forms::Label^ lblMinute;
-	private: System::Windows::Forms::Timer^ TimerMin;
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ lblHours;
 	private: System::Windows::Forms::Button^ btnStart;
 	private: System::Windows::Forms::Button^ btnRest;
-	private: System::Windows::Forms::Timer^ TimerH;
+	private: System::Windows::Forms::Timer^ TimerSet;
+
 
 
 
@@ -75,13 +76,12 @@ namespace TimerNoot {
 			this->btnExit = (gcnew System::Windows::Forms::Button());
 			this->lblSecond = (gcnew System::Windows::Forms::Label());
 			this->lblMinute = (gcnew System::Windows::Forms::Label());
-			this->TimerMin = (gcnew System::Windows::Forms::Timer(this->components));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->lblHours = (gcnew System::Windows::Forms::Label());
 			this->btnStart = (gcnew System::Windows::Forms::Button());
 			this->btnRest = (gcnew System::Windows::Forms::Button());
-			this->TimerH = (gcnew System::Windows::Forms::Timer(this->components));
+			this->TimerSet = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
 			// 
 			// TimerSec
@@ -120,11 +120,6 @@ namespace TimerNoot {
 			this->lblMinute->Size = System::Drawing::Size(36, 25);
 			this->lblMinute->TabIndex = 2;
 			this->lblMinute->Text = L"00";
-			// 
-			// TimerMin
-			// 
-			this->TimerMin->Interval = 60000;
-			this->TimerMin->Tick += gcnew System::EventHandler(this, &MyForm::TimerMin_Tick);
 			// 
 			// label1
 			// 
@@ -165,7 +160,7 @@ namespace TimerNoot {
 			this->btnStart->Name = L"btnStart";
 			this->btnStart->Size = System::Drawing::Size(78, 25);
 			this->btnStart->TabIndex = 6;
-			this->btnStart->Text = L"«‡ÔÛÒÚËÚ¸";
+			this->btnStart->Text = L"–ó–∞–ø—É—Å—Ç–∏—Ç—å";
 			this->btnStart->UseVisualStyleBackColor = true;
 			this->btnStart->Click += gcnew System::EventHandler(this, &MyForm::btnStart_Click_1);
 			// 
@@ -175,14 +170,14 @@ namespace TimerNoot {
 			this->btnRest->Name = L"btnRest";
 			this->btnRest->Size = System::Drawing::Size(111, 23);
 			this->btnRest->TabIndex = 7;
-			this->btnRest->Text = L"ŒÚ‰˚ı‡Ú¸  1 : 20";
+			this->btnRest->Text = L"–û—Ç–¥—ã—Ö–∞—Ç—å  1 : 20";
 			this->btnRest->UseVisualStyleBackColor = true;
 			this->btnRest->Click += gcnew System::EventHandler(this, &MyForm::btnRest_Click);
 			// 
-			// TimerH
+			// TimerSet
 			// 
-			this->TimerH->Interval = 3600000;
-			this->TimerH->Tick += gcnew System::EventHandler(this, &MyForm::TimerH_Tick);
+			this->TimerSet->Interval = 1000;
+			this->TimerSet->Tick += gcnew System::EventHandler(this, &MyForm::TimerSet_Tick);
 			// 
 			// MyForm
 			// 
@@ -210,12 +205,13 @@ namespace TimerNoot {
 	int TimerCounterS,TCounterRestS;
 	int TimerCounterM,TCounterRestM;
 	int TimerCounterH,TCounterRestH;
+	bool TRest;
 	
-
+	
 	private: System::Void btnExit_Click(System::Object^ sender, System::EventArgs^ e) {
 		exit(0);
 	}
-//--------------- «‡„ÛÊ‡ÂÏ ÙÓÏÛ --------------//
+//--------------- –ó–∞–≥—Ä—É–∂–∞–µ–º —Ñ–æ—Ä–º—É --------------//
 
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		
@@ -223,8 +219,7 @@ namespace TimerNoot {
 		TimerCounterM = 0;
 		TimerCounterH = 0;
 
-		TCounterRestS = 0; // —˜ÚÂ˜ËÍ ÓÚ‰˚ı‡ ÛÒÚ‡Ì‚ÓÎÂÌÌ
-		TCounterRestM = 0; // —˜ÚÂ˜ËÍ ÓÚ‰˚ı‡ ÛÒÚ‡Ì‚ÓÎÂÌÌ
+		
 
 		lblMinute->Text = "00";
 		lblSecond->Text = "00";
@@ -232,111 +227,96 @@ namespace TimerNoot {
 
 
 		TimerSec->Enabled = false;
-		TimerMin->Enabled = false;
-		TimerH->Enabled = false;
+		TimerSet->Enabled = false;
 
-		TimerSec->Interval = 1000;
-		TimerMin->Interval = 60000;
-		TimerH->Interval = 3600000;
-		
+		TimerSec->Interval = 1;
+		TimerSet->Interval = 1000; // –£—Å—Ç–∞–Ω–æ–≤–ª–µ–Ω–Ω–æ–µ –≤—Ä–µ–º—è
 	}
-	private: System::Void TimerSec_Tick(System::Object^ sender, System::EventArgs^ e) {
-		TimerCounterS++;
-		lblSecond->Text = "00";
-		if (TimerCounterS == 60)
-		{
-			TimerCounterS = 0;
-			lblSecond->Text = "00";// + TimerCounterS.ToString();
-		}
-		else
-		{
-			(TimerCounterS < 10) ? lblSecond->Text = "0" + TimerCounterS.ToString() : lblSecond->Text = TimerCounterS.ToString();
-		}
-
-		if (TimerCounterS== 20 && TimerMin->Enabled == false)
-		{
-			TimerSec->Stop();
-			TimerCounterM = 0;
-			TimerCounterS = 0;
-			TimerSec->Enabled = false;
-		}
-
-		
-	}
-	private: System::Void TimerMin_Tick(System::Object^ sender, System::EventArgs^ e) {
-
-		TimerCounterM++;
-
-		if (TimerCounterM == 60)
-		{
-			TimerCounterM = 0;
-			lblMinute->Text = "0" + TimerCounterM.ToString();
-		}
-		else
-		{
-			(TimerCounterM < 10) ? lblMinute->Text = "0" + TimerCounterM.ToString() : lblMinute->Text = TimerCounterM.ToString();
-		}
-		
-
-		if (TCounterRestM == 1) // ”ÒÚ‡ÌÓ‚ËÎË ¬ÂÏˇ ‰Îˇ ÓÚ‰˚ı‡ ÏËÌÛÚ˚
-		{
-			TimerMin->Stop();
-			TimerCounterM = 0;
-			TimerCounterS = 0;
-			TimerMin->Enabled = false;
-		}
-
-		
-	}
-
-
-private: System::Void btnStart_Click_1(System::Object^ sender, System::EventArgs^ e) {
-	TimerSec->Enabled = true;
-	TimerMin->Enabled = true;
 	
-	TimerCounterS = 0;
-	TimerCounterM = 0;
-	TimerCounterH = 0;
+	private: System::Void TimerSec_Tick(System::Object^ sender, System::EventArgs^ e) 
+		{
+		
+				
+		if (TimerCounterS == 59) // –°–µ–∫—É–Ω–¥–∞
+		{
+			TimerCounterS = 0;
+			lblSecond->Text = "00";
+
+			if (TimerCounterM == 59) // –ú–∏–Ω—É—Ç–∞
+			{
+				TimerCounterM = 0;
+				lblMinute->Text = "00";
+			
+				if (TimerCounterH == 23) // –ß–∞—Å—ã
+				{
+					TimerSec->Stop();
+					TimerCounterH = 0;
+					lblSecond->Text = "00";
+					lblMinute->Text = "00";
+					lblHours->Text = "24";
+				}
+				else {
+					TimerCounterH++;
+					(TimerCounterH < 10) ? lblHours->Text = "0" + TimerCounterH.ToString() : lblHours->Text = TimerCounterH.ToString();
+				}
+			
+			}
+			
+			else // –û–∫–æ–Ω—á–∞–Ω–∏–µ –º–∏–Ω—É—Ç—ã;
+			{
+				TimerCounterM++;
+				(TimerCounterM < 10) ? 	lblMinute->Text = "0" + TimerCounterM.ToString() : lblMinute->Text = TimerCounterM.ToString();
+			}
+
+
+		}
+		else // –æ–∫–æ–Ω—á–∞–Ω–∏–µ —Å–µ–∫—É–Ω–¥—ã
+		{
+			TimerCounterS++;
+			(TimerCounterS < 10) ? 
+				lblSecond->Text = "0" + TimerCounterS.ToString() : lblSecond->Text = TimerCounterS.ToString();
+		}
+
+			
+	}
+
+	 private: System::Void TimerSet_Tick(System::Object^ sender, System::EventArgs^ e)
+		{
+
+
+
+		}
+private: System::Void btnStart_Click_1(System::Object^ sender, System::EventArgs^ e) {
+	TimerSec->Start();
+	
+	TimerCounterS = 0; // –û–±–Ω—É–ª—è–µ–º —Ç–∞–π–º–µ—Ä
+	TimerCounterM = 0; // –û–±–Ω—É–ª—è–µ–º —Ç–∞–π–º–µ—Ä
+	TimerCounterH = 0; // –û–±–Ω—É–ª—è–µ–º —Ç–∞–π–º–µ—Ä
 
 	TCounterRestM = 0;
 	TCounterRestS = 0;
 
-	lblMinute->Text = "00"; // —·‡Ò˚‚‡ÂÏ ÏËÌÛÚ˚ Ì‡ ÌÓÎ¸
-	lblSecond->Text = "00"; // —·‡Ò˚‚‡ÂÏ ÒÂÍÛÌ‰˚ Ì‡ ÌÓÎ¸
+	lblMinute->Text = "00"; // –°–±—Ä–∞—Å—ã–≤–∞–µ–º –º–∏–Ω—É—Ç—ã –Ω–∞ –Ω–æ–ª—å
+	lblSecond->Text = "00"; // –°–±—Ä–∞—Å—ã–≤–∞–µ–º —Å–µ–∫—É–Ω–¥—ã –Ω–∞ –Ω–æ–ª—å
 	lblHours->Text = "00";
 
 }
 
 private: System::Void btnRest_Click(System::Object^ sender, System::EventArgs^ e) {
 
-	TimerSec->Enabled = true;
-	TimerMin->Enabled = true;
-	TimerCounterS = 0;
-	TimerCounterM = 0;
-	TCounterRestS = 20; // ”ÒÚ‡ÌÓ‚ËÎË ‚ÂÏˇ ÓÚ ÍÌÓÔÍË
-	TCounterRestM = 1;
-
-	lblMinute->Text = "00"; // —·‡Ò˚‚‡ÂÏ ÏËÌÛÚ˚ Ì‡ ÌÓÎ¸
-	lblSecond->Text = "00"; // —·‡Ò˚‚‡ÂÏ ÒÂÍÛÌ‰˚ Ì‡ ÌÓÎ¸
+	TimerSec->Stop();
+	TimerSet->Start();
 	
+	TimerCounterH = 0;
+	TimerCounterM = 1;
+	TimerCounterS = 20;
+		
+	(TimerCounterM < 10 ) ? lblMinute->Text="0"+TimerCounterM.ToString():lblMinute->Text = TimerCounterM.ToString(); // –°–±—Ä–∞—Å—ã–≤–∞–µ–º –º–∏–Ω—É—Ç—ã –Ω–∞ —É—Å—Ç–∞–Ω–æ–≤–ª–µ–Ω–∏–µ
+	(TimerCounterS < 10)? lblSecond->Text ="0"+ TimerCounterS.ToString() : lblSecond->Text = TimerCounterS.ToString(); // –°–±—Ä–∞—Å—ã–≤–∞–µ–º —Å–µ–∫—É–Ω–¥—ã –Ω–∞ —É—Å—Ç–∞–Ω–æ–≤–ª–µ–Ω–∏–µ
+	lblHours->Text = TimerCounterH.ToString(); // –°–±—Ä–∞—Å—ã–≤–∞–µ–º —á–∞—Å—ã –Ω–∞ —É—Å—Ç–∞–Ω–æ–≤–ª–µ–Ω–∏–µ
 	
 }
-private: System::Void TimerH_Tick(System::Object^ sender, System::EventArgs^ e) {
-
-	TimerCounterH++;
-
-	if (TimerCounterH == 24)
-	{
-		TimerCounterH = 0;
-		lblHours ->Text = "0" + TimerCounterH.ToString();
-	}
-	else
-	{
-		(TimerCounterH < 10) ? lblHours->Text = "0" + TimerCounterH.ToString() : lblHours ->Text = TimerCounterH.ToString();
-	}
 
 
-
-}
 };
 }
