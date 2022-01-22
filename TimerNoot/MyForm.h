@@ -52,6 +52,13 @@ namespace TimerNoot {
 	private: System::Windows::Forms::Button^ btnRest;
 	private: System::Windows::Forms::Timer^ TimerSet;
 	private: System::Windows::Forms::Button^ btnStop;
+	private: System::Windows::Forms::ListView^ listView1;
+
+	private: System::Windows::Forms::ColumnHeader^ columnHeader2;
+	private: System::Windows::Forms::ColumnHeader^ columnHeader1;
+
+
+
 
 	private: System::ComponentModel::IContainer^ components;
 
@@ -69,6 +76,13 @@ namespace TimerNoot {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
+			System::Windows::Forms::ListViewItem^ listViewItem1 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(1) { L"Время" },
+				-1, System::Drawing::Color::Empty, System::Drawing::SystemColors::Window, nullptr));
+			System::Windows::Forms::ListViewItem^ listViewItem2 = (gcnew System::Windows::Forms::ListViewItem(L"4894"));
+			System::Windows::Forms::ListViewItem^ listViewItem3 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(2) {
+				L"123",
+					L"цук"
+			}, -1));
 			this->TimerSec = (gcnew System::Windows::Forms::Timer(this->components));
 			this->btnExit = (gcnew System::Windows::Forms::Button());
 			this->lblSecond = (gcnew System::Windows::Forms::Label());
@@ -80,6 +94,9 @@ namespace TimerNoot {
 			this->btnRest = (gcnew System::Windows::Forms::Button());
 			this->TimerSet = (gcnew System::Windows::Forms::Timer(this->components));
 			this->btnStop = (gcnew System::Windows::Forms::Button());
+			this->listView1 = (gcnew System::Windows::Forms::ListView());
+			this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
+			this->columnHeader2 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->SuspendLayout();
 			// 
 			// TimerSec
@@ -192,13 +209,51 @@ namespace TimerNoot {
 			this->btnStop->UseVisualStyleBackColor = true;
 			this->btnStop->Click += gcnew System::EventHandler(this, &MyForm::btnStop_Click);
 			// 
+			// listView1
+			// 
+			this->listView1->Activation = System::Windows::Forms::ItemActivation::OneClick;
+			this->listView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) { this->columnHeader1, this->columnHeader2 });
+			this->listView1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->listView1->FullRowSelect = true;
+			this->listView1->GridLines = true;
+			this->listView1->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			listViewItem1->Checked = true;
+			listViewItem1->StateImageIndex = 1;
+			listViewItem2->Checked = true;
+			listViewItem2->StateImageIndex = 1;
+			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(3) {
+				listViewItem1, listViewItem2,
+					listViewItem3
+			});
+			this->listView1->Location = System::Drawing::Point(24, 129);
+			this->listView1->Name = L"listView1";
+			this->listView1->ShowGroups = false;
+			this->listView1->Size = System::Drawing::Size(304, 175);
+			this->listView1->TabIndex = 9;
+			this->listView1->UseCompatibleStateImageBehavior = false;
+			this->listView1->View = System::Windows::Forms::View::Details;
+			this->listView1->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::listView1_SelectedIndexChanged);
+			// 
+			// columnHeader1
+			// 
+			this->columnHeader1->Text = L"Название Счетчика";
+			this->columnHeader1->Width = 150;
+			// 
+			// columnHeader2
+			// 
+			this->columnHeader2->Text = L"Установленное время";
+			this->columnHeader2->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->columnHeader2->Width = 150;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
 			this->BackColor = System::Drawing::SystemColors::Info;
-			this->ClientSize = System::Drawing::Size(506, 113);
+			this->ClientSize = System::Drawing::Size(506, 316);
+			this->Controls->Add(this->listView1);
 			this->Controls->Add(this->btnStop);
 			this->Controls->Add(this->btnRest);
 			this->Controls->Add(this->btnStart);
@@ -222,18 +277,18 @@ namespace TimerNoot {
 #pragma endregion
 	
 	
-	int TimerCounterS,TCounterRestS;
-	int TimerCounterM,TCounterRestM;
-	int TimerCounterH,TCounterRestH;
+	int TimerCounterS;
+	int TimerCounterM;
+	int TimerCounterH;
 	bool TStop;
 	
 	
-	private: System::Void btnExit_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void btnExit_Click(System::Object^ sender, System::EventArgs^ e) {
 		exit(0);
 	}
 //--------------- Загружаем форму --------------//
 
-	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		
 		TimerCounterS = 0;
 		TimerCounterM = 0;
@@ -302,16 +357,36 @@ private: System::Void TimerSec_Tick(System::Object^ sender, System::EventArgs^ e
 
 private: System::Void TimerSet_Tick(System::Object^ sender, System::EventArgs^ e)
 		{
-	if (TimerCounterS == 0) { 
-		// Пишем установка таймера здесь закончил-------------------------
-		TimerSet->Stop(); 
-		
+	if (TimerCounterS == 0) {
+		if (TimerCounterH == 0 && TimerCounterM == 0 && TimerCounterH == 0)  TimerSet->Stop();
+
+		if (TimerCounterM != 0) // Уменьшаем минуты
+		{
+			TimerCounterM--; 
+			TimerCounterS = 59;
+			(TimerCounterM < 10) ? lblMinute->Text = "0" + TimerCounterM.ToString() : lblMinute->Text = TimerCounterM.ToString();
+			(TimerCounterS < 10) ? lblSecond->Text = "0" + TimerCounterS.ToString() : lblSecond->Text = TimerCounterS.ToString(); 
+
+
+		}
+		else if (TimerCounterH !=0) // Уменьшаем час
+		{
+			TimerCounterH--;
+			TimerCounterM = 59;
+			(TimerCounterH < 10) ? lblHours->Text = "0" + TimerCounterH.ToString() : lblHours->Text = TimerCounterH.ToString();
+			(TimerCounterM < 10) ? lblMinute->Text = "0" + TimerCounterM.ToString() : lblMinute->Text = TimerCounterM.ToString();
+			(TimerCounterS < 10) ? lblSecond->Text = "0" + TimerCounterS.ToString() : lblSecond->Text = TimerCounterS.ToString();
+
+		}
+
+
 	}
-	else { 
+	else { // Оконнчание уменьшине секунды
 		TimerCounterS--;
 		(TimerCounterS < 10) ? lblSecond->Text = "0" + TimerCounterS.ToString() : lblSecond->Text = TimerCounterS.ToString(); // Сбрасываем секунды на установление
 	}
 		}
+
 private: System::Void btnStart_Click_1(System::Object^ sender, System::EventArgs^ e) {
 	TimerSec->Start();
 	if (!TStop) // Считаем кнопук стоп
@@ -320,8 +395,7 @@ private: System::Void btnStart_Click_1(System::Object^ sender, System::EventArgs
 		TimerCounterM = 0; // Обнуляем таймер
 		TimerCounterH = 0; // Обнуляем таймер
 
-		TCounterRestM = 0;
-		TCounterRestS = 0;
+		
 
 		lblMinute->Text = "00"; // Сбрасываем минуты на ноль
 		lblSecond->Text = "00"; // Сбрасываем секунды на ноль
@@ -335,9 +409,9 @@ private: System::Void btnRest_Click(System::Object^ sender, System::EventArgs^ e
 	TimerSec->Stop();
 	TimerSet->Start();
 	
-	TimerCounterH = 0;
-	TimerCounterM = 1;
-	TimerCounterS = 20;
+	TimerCounterH = 1;
+	TimerCounterM = 5;
+	TimerCounterS = 4;
 		
 	(TimerCounterM < 10 ) ? lblMinute->Text="0"+TimerCounterM.ToString():lblMinute->Text = TimerCounterM.ToString(); // Сбрасываем минуты на установление
 	(TimerCounterS < 10)? lblSecond->Text ="0"+ TimerCounterS.ToString() : lblSecond->Text = TimerCounterS.ToString(); // Сбрасываем секунды на установление
@@ -351,5 +425,8 @@ private: System::Void btnStop_Click(System::Object^ sender, System::EventArgs^ e
 }
 
 
+
+private: System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
