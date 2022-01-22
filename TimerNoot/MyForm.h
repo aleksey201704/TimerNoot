@@ -51,10 +51,7 @@ namespace TimerNoot {
 	private: System::Windows::Forms::Button^ btnStart;
 	private: System::Windows::Forms::Button^ btnRest;
 	private: System::Windows::Forms::Timer^ TimerSet;
-
-
-
-
+	private: System::Windows::Forms::Button^ btnStop;
 
 	private: System::ComponentModel::IContainer^ components;
 
@@ -82,6 +79,7 @@ namespace TimerNoot {
 			this->btnStart = (gcnew System::Windows::Forms::Button());
 			this->btnRest = (gcnew System::Windows::Forms::Button());
 			this->TimerSet = (gcnew System::Windows::Forms::Timer(this->components));
+			this->btnStop = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// TimerSec
@@ -91,7 +89,8 @@ namespace TimerNoot {
 			// 
 			// btnExit
 			// 
-			this->btnExit->Location = System::Drawing::Point(264, 64);
+			this->btnExit->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->btnExit->Location = System::Drawing::Point(416, 78);
 			this->btnExit->Name = L"btnExit";
 			this->btnExit->Size = System::Drawing::Size(78, 25);
 			this->btnExit->TabIndex = 0;
@@ -106,7 +105,7 @@ namespace TimerNoot {
 			this->lblSecond->Font = (gcnew System::Drawing::Font(L"a_LCDNovaObl", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->lblSecond->ForeColor = System::Drawing::Color::Coral;
-			this->lblSecond->Location = System::Drawing::Point(278, 7);
+			this->lblSecond->Location = System::Drawing::Point(181, 9);
 			this->lblSecond->Name = L"lblSecond";
 			this->lblSecond->Size = System::Drawing::Size(73, 54);
 			this->lblSecond->TabIndex = 1;
@@ -117,7 +116,7 @@ namespace TimerNoot {
 			this->lblMinute->AutoSize = true;
 			this->lblMinute->Font = (gcnew System::Drawing::Font(L"a_LCDNovaObl", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblMinute->Location = System::Drawing::Point(188, 8);
+			this->lblMinute->Location = System::Drawing::Point(91, 10);
 			this->lblMinute->Name = L"lblMinute";
 			this->lblMinute->Size = System::Drawing::Size(73, 54);
 			this->lblMinute->TabIndex = 2;
@@ -128,7 +127,7 @@ namespace TimerNoot {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"a_LCDNovaObl", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(255, 0);
+			this->label1->Location = System::Drawing::Point(158, 2);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(32, 54);
 			this->label1->TabIndex = 3;
@@ -139,7 +138,7 @@ namespace TimerNoot {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"a_LCDNovaObl", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label2->Location = System::Drawing::Point(171, 0);
+			this->label2->Location = System::Drawing::Point(74, 2);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(32, 54);
 			this->label2->TabIndex = 4;
@@ -150,7 +149,7 @@ namespace TimerNoot {
 			this->lblHours->AutoSize = true;
 			this->lblHours->Font = (gcnew System::Drawing::Font(L"a_LCDNovaObl", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblHours->Location = System::Drawing::Point(109, 7);
+			this->lblHours->Location = System::Drawing::Point(12, 9);
 			this->lblHours->Name = L"lblHours";
 			this->lblHours->Size = System::Drawing::Size(73, 54);
 			this->lblHours->TabIndex = 5;
@@ -158,7 +157,8 @@ namespace TimerNoot {
 			// 
 			// btnStart
 			// 
-			this->btnStart->Location = System::Drawing::Point(180, 65);
+			this->btnStart->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->btnStart->Location = System::Drawing::Point(260, 10);
 			this->btnStart->Name = L"btnStart";
 			this->btnStart->Size = System::Drawing::Size(78, 25);
 			this->btnStart->TabIndex = 6;
@@ -168,7 +168,8 @@ namespace TimerNoot {
 			// 
 			// btnRest
 			// 
-			this->btnRest->Location = System::Drawing::Point(383, 43);
+			this->btnRest->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->btnRest->Location = System::Drawing::Point(21, 80);
 			this->btnRest->Name = L"btnRest";
 			this->btnRest->Size = System::Drawing::Size(111, 23);
 			this->btnRest->TabIndex = 7;
@@ -181,12 +182,24 @@ namespace TimerNoot {
 			this->TimerSet->Interval = 1000;
 			this->TimerSet->Tick += gcnew System::EventHandler(this, &MyForm::TimerSet_Tick);
 			// 
+			// btnStop
+			// 
+			this->btnStop->Location = System::Drawing::Point(260, 39);
+			this->btnStop->Name = L"btnStop";
+			this->btnStop->Size = System::Drawing::Size(78, 25);
+			this->btnStop->TabIndex = 8;
+			this->btnStop->Text = L"Остановить";
+			this->btnStop->UseVisualStyleBackColor = true;
+			this->btnStop->Click += gcnew System::EventHandler(this, &MyForm::btnStop_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->AutoSize = true;
 			this->BackColor = System::Drawing::SystemColors::Info;
-			this->ClientSize = System::Drawing::Size(506, 99);
+			this->ClientSize = System::Drawing::Size(506, 113);
+			this->Controls->Add(this->btnStop);
 			this->Controls->Add(this->btnRest);
 			this->Controls->Add(this->btnStart);
 			this->Controls->Add(this->lblHours);
@@ -195,8 +208,11 @@ namespace TimerNoot {
 			this->Controls->Add(this->lblMinute);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label2);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->MaximizeBox = false;
+			this->MinimizeBox = false;
 			this->Name = L"MyForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
@@ -204,10 +220,12 @@ namespace TimerNoot {
 
 		}
 #pragma endregion
+	
+	
 	int TimerCounterS,TCounterRestS;
 	int TimerCounterM,TCounterRestM;
 	int TimerCounterH,TCounterRestH;
-	bool TRest;
+	bool TStop;
 	
 	
 	private: System::Void btnExit_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -221,7 +239,7 @@ namespace TimerNoot {
 		TimerCounterM = 0;
 		TimerCounterH = 0;
 
-		
+		TStop = false;
 
 		lblMinute->Text = "00";
 		lblSecond->Text = "00";
@@ -235,10 +253,10 @@ namespace TimerNoot {
 		TimerSet->Interval = 1000; // Установленное время
 	}
 	
-	private: System::Void TimerSec_Tick(System::Object^ sender, System::EventArgs^ e) 
+private: System::Void TimerSec_Tick(System::Object^ sender, System::EventArgs^ e) 
 		{
 		
-				
+	
 		if (TimerCounterS == 59) // Секунда
 		{
 			TimerCounterS = 0;
@@ -282,25 +300,33 @@ namespace TimerNoot {
 			
 	}
 
-	 private: System::Void TimerSet_Tick(System::Object^ sender, System::EventArgs^ e)
+private: System::Void TimerSet_Tick(System::Object^ sender, System::EventArgs^ e)
 		{
-
-
-
+	if (TimerCounterS == 0) { 
+		// Пишем установка таймера здесь закончил-------------------------
+		TimerSet->Stop(); 
+		
+	}
+	else { 
+		TimerCounterS--;
+		(TimerCounterS < 10) ? lblSecond->Text = "0" + TimerCounterS.ToString() : lblSecond->Text = TimerCounterS.ToString(); // Сбрасываем секунды на установление
+	}
 		}
 private: System::Void btnStart_Click_1(System::Object^ sender, System::EventArgs^ e) {
 	TimerSec->Start();
-	
-	TimerCounterS = 0; // Обнуляем таймер
-	TimerCounterM = 0; // Обнуляем таймер
-	TimerCounterH = 0; // Обнуляем таймер
+	if (!TStop) // Считаем кнопук стоп
+	{
+		TimerCounterS = 0; // Обнуляем таймер
+		TimerCounterM = 0; // Обнуляем таймер
+		TimerCounterH = 0; // Обнуляем таймер
 
-	TCounterRestM = 0;
-	TCounterRestS = 0;
+		TCounterRestM = 0;
+		TCounterRestS = 0;
 
-	lblMinute->Text = "00"; // Сбрасываем минуты на ноль
-	lblSecond->Text = "00"; // Сбрасываем секунды на ноль
-	lblHours->Text = "00";
+		lblMinute->Text = "00"; // Сбрасываем минуты на ноль
+		lblSecond->Text = "00"; // Сбрасываем секунды на ноль
+		lblHours->Text = "00";
+	}
 
 }
 
@@ -315,8 +341,13 @@ private: System::Void btnRest_Click(System::Object^ sender, System::EventArgs^ e
 		
 	(TimerCounterM < 10 ) ? lblMinute->Text="0"+TimerCounterM.ToString():lblMinute->Text = TimerCounterM.ToString(); // Сбрасываем минуты на установление
 	(TimerCounterS < 10)? lblSecond->Text ="0"+ TimerCounterS.ToString() : lblSecond->Text = TimerCounterS.ToString(); // Сбрасываем секунды на установление
-	lblHours->Text = TimerCounterH.ToString(); // Сбрасываем часы на установление
+	(TimerCounterH < 10) ? lblHours->Text ="0"+ TimerCounterH.ToString(): lblHours->Text = TimerCounterH.ToString(); // Сбрасываем часы на установление
 	
+}
+
+private: System::Void btnStop_Click(System::Object^ sender, System::EventArgs^ e) {
+	TimerSec->Stop();
+	TStop = true;
 }
 
 
