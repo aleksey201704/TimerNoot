@@ -91,7 +91,7 @@ namespace TimerNoot {
 			// 
 			// btnExit
 			// 
-			this->btnExit->Location = System::Drawing::Point(187, 43);
+			this->btnExit->Location = System::Drawing::Point(264, 64);
 			this->btnExit->Name = L"btnExit";
 			this->btnExit->Size = System::Drawing::Size(78, 25);
 			this->btnExit->TabIndex = 0;
@@ -102,61 +102,63 @@ namespace TimerNoot {
 			// lblSecond
 			// 
 			this->lblSecond->AutoSize = true;
-			this->lblSecond->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->lblSecond->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->lblSecond->Font = (gcnew System::Drawing::Font(L"a_LCDNovaObl", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblSecond->Location = System::Drawing::Point(96, 9);
+			this->lblSecond->ForeColor = System::Drawing::Color::Coral;
+			this->lblSecond->Location = System::Drawing::Point(278, 7);
 			this->lblSecond->Name = L"lblSecond";
-			this->lblSecond->Size = System::Drawing::Size(36, 25);
+			this->lblSecond->Size = System::Drawing::Size(73, 54);
 			this->lblSecond->TabIndex = 1;
 			this->lblSecond->Text = L"00";
 			// 
 			// lblMinute
 			// 
 			this->lblMinute->AutoSize = true;
-			this->lblMinute->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->lblMinute->Font = (gcnew System::Drawing::Font(L"a_LCDNovaObl", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblMinute->Location = System::Drawing::Point(54, 9);
+			this->lblMinute->Location = System::Drawing::Point(188, 8);
 			this->lblMinute->Name = L"lblMinute";
-			this->lblMinute->Size = System::Drawing::Size(36, 25);
+			this->lblMinute->Size = System::Drawing::Size(73, 54);
 			this->lblMinute->TabIndex = 2;
 			this->lblMinute->Text = L"00";
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"a_LCDNovaObl", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(84, 9);
+			this->label1->Location = System::Drawing::Point(255, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(18, 25);
+			this->label1->Size = System::Drawing::Size(32, 54);
 			this->label1->TabIndex = 3;
 			this->label1->Text = L":";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label2->Font = (gcnew System::Drawing::Font(L"a_LCDNovaObl", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label2->Location = System::Drawing::Point(42, 9);
+			this->label2->Location = System::Drawing::Point(171, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(18, 25);
+			this->label2->Size = System::Drawing::Size(32, 54);
 			this->label2->TabIndex = 4;
 			this->label2->Text = L":";
 			// 
 			// lblHours
 			// 
 			this->lblHours->AutoSize = true;
-			this->lblHours->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->lblHours->Font = (gcnew System::Drawing::Font(L"a_LCDNovaObl", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->lblHours->Location = System::Drawing::Point(12, 9);
+			this->lblHours->Location = System::Drawing::Point(109, 7);
 			this->lblHours->Name = L"lblHours";
-			this->lblHours->Size = System::Drawing::Size(36, 25);
+			this->lblHours->Size = System::Drawing::Size(73, 54);
 			this->lblHours->TabIndex = 5;
 			this->lblHours->Text = L"00";
 			// 
 			// btnStart
 			// 
-			this->btnStart->Location = System::Drawing::Point(103, 43);
+			this->btnStart->Location = System::Drawing::Point(180, 65);
 			this->btnStart->Name = L"btnStart";
 			this->btnStart->Size = System::Drawing::Size(78, 25);
 			this->btnStart->TabIndex = 6;
@@ -184,15 +186,15 @@ namespace TimerNoot {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Info;
-			this->ClientSize = System::Drawing::Size(506, 78);
+			this->ClientSize = System::Drawing::Size(506, 99);
 			this->Controls->Add(this->btnRest);
 			this->Controls->Add(this->btnStart);
 			this->Controls->Add(this->lblHours);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
-			this->Controls->Add(this->lblMinute);
-			this->Controls->Add(this->lblSecond);
 			this->Controls->Add(this->btnExit);
+			this->Controls->Add(this->lblSecond);
+			this->Controls->Add(this->lblMinute);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
@@ -229,7 +231,7 @@ namespace TimerNoot {
 		TimerSec->Enabled = false;
 		TimerSet->Enabled = false;
 
-		TimerSec->Interval = 1;
+		TimerSec->Interval = 1000;
 		TimerSet->Interval = 1000; // Установленное время
 	}
 	
