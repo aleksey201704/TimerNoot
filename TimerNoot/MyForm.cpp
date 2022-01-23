@@ -12,7 +12,7 @@ void main(/*array<String^>^ arg*/) {
     Application::SetCompatibleTextRenderingDefault(false);
     
     TimerNoot::MyForm form; //WinFormsTest - имя вашего проекта
-    form.ClientSize = Size(350, 380);
+    form.ClientSize = Size(340, 305);
     Application::Run(% form);
 
     
