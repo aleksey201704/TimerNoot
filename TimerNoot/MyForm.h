@@ -56,6 +56,9 @@ namespace TimerNoot {
 
 	private: System::Windows::Forms::ColumnHeader^ columnHeader2;
 	private: System::Windows::Forms::ColumnHeader^ columnHeader1;
+	private: System::Windows::Forms::Panel^ panel1;
+	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox1;
+	private: System::Windows::Forms::Button^ button1;
 
 
 
@@ -76,10 +79,10 @@ namespace TimerNoot {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::Windows::Forms::ListViewItem^ listViewItem1 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(1) { L"Время" },
+			System::Windows::Forms::ListViewItem^ listViewItem4 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(1) { L"Время" },
 				-1, System::Drawing::Color::Empty, System::Drawing::SystemColors::Window, nullptr));
-			System::Windows::Forms::ListViewItem^ listViewItem2 = (gcnew System::Windows::Forms::ListViewItem(L"4894"));
-			System::Windows::Forms::ListViewItem^ listViewItem3 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(2) {
+			System::Windows::Forms::ListViewItem^ listViewItem5 = (gcnew System::Windows::Forms::ListViewItem(L"4894"));
+			System::Windows::Forms::ListViewItem^ listViewItem6 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(2) {
 				L"123",
 					L"цук"
 			}, -1));
@@ -97,6 +100,10 @@ namespace TimerNoot {
 			this->listView1 = (gcnew System::Windows::Forms::ListView());
 			this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader2 = (gcnew System::Windows::Forms::ColumnHeader());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->maskedTextBox1 = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// TimerSec
@@ -107,7 +114,7 @@ namespace TimerNoot {
 			// btnExit
 			// 
 			this->btnExit->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->btnExit->Location = System::Drawing::Point(416, 78);
+			this->btnExit->Location = System::Drawing::Point(260, 80);
 			this->btnExit->Name = L"btnExit";
 			this->btnExit->Size = System::Drawing::Size(78, 25);
 			this->btnExit->TabIndex = 0;
@@ -217,19 +224,20 @@ namespace TimerNoot {
 				static_cast<System::Byte>(204)));
 			this->listView1->FullRowSelect = true;
 			this->listView1->GridLines = true;
+			this->listView1->HideSelection = false;
 			this->listView1->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			listViewItem1->Checked = true;
-			listViewItem1->StateImageIndex = 1;
-			listViewItem2->Checked = true;
-			listViewItem2->StateImageIndex = 1;
+			listViewItem4->Checked = true;
+			listViewItem4->StateImageIndex = 1;
+			listViewItem5->Checked = true;
+			listViewItem5->StateImageIndex = 1;
 			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(3) {
-				listViewItem1, listViewItem2,
-					listViewItem3
+				listViewItem4, listViewItem5,
+					listViewItem6
 			});
 			this->listView1->Location = System::Drawing::Point(24, 129);
 			this->listView1->Name = L"listView1";
 			this->listView1->ShowGroups = false;
-			this->listView1->Size = System::Drawing::Size(304, 175);
+			this->listView1->Size = System::Drawing::Size(314, 175);
 			this->listView1->TabIndex = 9;
 			this->listView1->UseCompatibleStateImageBehavior = false;
 			this->listView1->View = System::Windows::Forms::View::Details;
@@ -246,13 +254,40 @@ namespace TimerNoot {
 			this->columnHeader2->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->columnHeader2->Width = 150;
 			// 
+			// panel1
+			// 
+			this->panel1->Controls->Add(this->maskedTextBox1);
+			this->panel1->Controls->Add(this->button1);
+			this->panel1->Location = System::Drawing::Point(344, 12);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(290, 292);
+			this->panel1->TabIndex = 10;
+			this->panel1->Visible = false;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(202, 16);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 0;
+			this->button1->Text = L"Добавить";
+			this->button1->UseVisualStyleBackColor = true;
+			// 
+			// maskedTextBox1
+			// 
+			this->maskedTextBox1->Location = System::Drawing::Point(15, 16);
+			this->maskedTextBox1->Name = L"maskedTextBox1";
+			this->maskedTextBox1->Size = System::Drawing::Size(169, 20);
+			this->maskedTextBox1->TabIndex = 1;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->AutoSize = true;
+			this->AutoSize = false;
 			this->BackColor = System::Drawing::SystemColors::Info;
-			this->ClientSize = System::Drawing::Size(506, 316);
+			//this->ClientSize = System::Drawing::Size(0, 0);
+			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->listView1);
 			this->Controls->Add(this->btnStop);
 			this->Controls->Add(this->btnRest);
@@ -270,6 +305,8 @@ namespace TimerNoot {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
+			this->panel1->ResumeLayout(false);
+			this->panel1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -293,6 +330,7 @@ private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) 
 		TimerCounterS = 0;
 		TimerCounterM = 0;
 		TimerCounterH = 0;
+		
 
 		TStop = false;
 
