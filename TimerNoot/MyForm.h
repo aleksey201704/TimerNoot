@@ -57,16 +57,19 @@ namespace TimerNoot {
 	private: System::Windows::Forms::ColumnHeader^ columnHeader2;
 	private: System::Windows::Forms::ColumnHeader^ columnHeader1;
 	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox1;
+
+
 	private: System::Windows::Forms::Button^ btnChange;
 
 
-	private: System::Windows::Forms::Label^ lblHideAdd;
+
 	private: System::Windows::Forms::Button^ btnAdd;
 	private: System::Windows::Forms::Label^ lblSetTimer;
-	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox2;
+
 	private: System::Windows::Forms::Label^ lblNameTimer;
 	private: System::Windows::Forms::Label^ lblShowAdd;
+	private: System::Windows::Forms::TextBox^ txtNameTimer;
+
 
 
 
@@ -102,13 +105,11 @@ namespace TimerNoot {
 			this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader2 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->lblHideAdd = (gcnew System::Windows::Forms::Label());
-			this->maskedTextBox1 = (gcnew System::Windows::Forms::MaskedTextBox());
-			this->btnChange = (gcnew System::Windows::Forms::Button());
-			this->lblNameTimer = (gcnew System::Windows::Forms::Label());
-			this->lblSetTimer = (gcnew System::Windows::Forms::Label());
-			this->maskedTextBox2 = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->txtNameTimer = (gcnew System::Windows::Forms::TextBox());
 			this->btnAdd = (gcnew System::Windows::Forms::Button());
+			this->lblSetTimer = (gcnew System::Windows::Forms::Label());
+			this->lblNameTimer = (gcnew System::Windows::Forms::Label());
+			this->btnChange = (gcnew System::Windows::Forms::Button());
 			this->lblShowAdd = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
@@ -256,12 +257,10 @@ namespace TimerNoot {
 			// panel1
 			// 
 			this->panel1->AutoSize = true;
+			this->panel1->Controls->Add(this->txtNameTimer);
 			this->panel1->Controls->Add(this->btnAdd);
 			this->panel1->Controls->Add(this->lblSetTimer);
-			this->panel1->Controls->Add(this->maskedTextBox2);
 			this->panel1->Controls->Add(this->lblNameTimer);
-			this->panel1->Controls->Add(this->lblHideAdd);
-			this->panel1->Controls->Add(this->maskedTextBox1);
 			this->panel1->Controls->Add(this->btnChange);
 			this->panel1->Location = System::Drawing::Point(347, 12);
 			this->panel1->Name = L"panel1";
@@ -269,45 +268,21 @@ namespace TimerNoot {
 			this->panel1->TabIndex = 10;
 			this->panel1->Visible = false;
 			// 
-			// lblHideAdd
+			// txtNameTimer
 			// 
-			this->lblHideAdd->AutoSize = true;
-			this->lblHideAdd->Font = (gcnew System::Drawing::Font(L"Elephant", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lblHideAdd->ForeColor = System::Drawing::Color::Blue;
-			this->lblHideAdd->Location = System::Drawing::Point(177, 295);
-			this->lblHideAdd->Name = L"lblHideAdd";
-			this->lblHideAdd->Size = System::Drawing::Size(101, 21);
-			this->lblHideAdd->TabIndex = 2;
-			this->lblHideAdd->Text = L"<<  Скрыть";
-			this->lblHideAdd->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::lblHideAdd_MouseClick);
-			this->lblHideAdd->MouseLeave += gcnew System::EventHandler(this, &MyForm::lblHideAdd_MouseLeave);
-			this->lblHideAdd->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::lblHideAdd_MouseMove);
+			this->txtNameTimer->Location = System::Drawing::Point(16, 32);
+			this->txtNameTimer->Name = L"txtNameTimer";
+			this->txtNameTimer->Size = System::Drawing::Size(255, 20);
+			this->txtNameTimer->TabIndex = 7;
 			// 
-			// maskedTextBox1
+			// btnAdd
 			// 
-			this->maskedTextBox1->Location = System::Drawing::Point(16, 32);
-			this->maskedTextBox1->Name = L"maskedTextBox1";
-			this->maskedTextBox1->Size = System::Drawing::Size(262, 20);
-			this->maskedTextBox1->TabIndex = 1;
-			// 
-			// btnChange
-			// 
-			this->btnChange->Location = System::Drawing::Point(16, 121);
-			this->btnChange->Name = L"btnChange";
-			this->btnChange->Size = System::Drawing::Size(102, 23);
-			this->btnChange->TabIndex = 0;
-			this->btnChange->Text = L"Изменить";
-			this->btnChange->UseVisualStyleBackColor = true;
-			// 
-			// lblNameTimer
-			// 
-			this->lblNameTimer->AutoSize = true;
-			this->lblNameTimer->Location = System::Drawing::Point(13, 16);
-			this->lblNameTimer->Name = L"lblNameTimer";
-			this->lblNameTimer->Size = System::Drawing::Size(105, 13);
-			this->lblNameTimer->TabIndex = 3;
-			this->lblNameTimer->Text = L"Название счетчика";
+			this->btnAdd->Location = System::Drawing::Point(124, 121);
+			this->btnAdd->Name = L"btnAdd";
+			this->btnAdd->Size = System::Drawing::Size(102, 23);
+			this->btnAdd->TabIndex = 6;
+			this->btnAdd->Text = L"Добавить новый";
+			this->btnAdd->UseVisualStyleBackColor = true;
 			// 
 			// lblSetTimer
 			// 
@@ -318,21 +293,23 @@ namespace TimerNoot {
 			this->lblSetTimer->TabIndex = 5;
 			this->lblSetTimer->Text = L"Установленное время";
 			// 
-			// maskedTextBox2
+			// lblNameTimer
 			// 
-			this->maskedTextBox2->Location = System::Drawing::Point(16, 81);
-			this->maskedTextBox2->Name = L"maskedTextBox2";
-			this->maskedTextBox2->Size = System::Drawing::Size(118, 20);
-			this->maskedTextBox2->TabIndex = 4;
+			this->lblNameTimer->AutoSize = true;
+			this->lblNameTimer->Location = System::Drawing::Point(13, 16);
+			this->lblNameTimer->Name = L"lblNameTimer";
+			this->lblNameTimer->Size = System::Drawing::Size(105, 13);
+			this->lblNameTimer->TabIndex = 3;
+			this->lblNameTimer->Text = L"Название счетчика";
 			// 
-			// btnAdd
+			// btnChange
 			// 
-			this->btnAdd->Location = System::Drawing::Point(124, 121);
-			this->btnAdd->Name = L"btnAdd";
-			this->btnAdd->Size = System::Drawing::Size(102, 23);
-			this->btnAdd->TabIndex = 6;
-			this->btnAdd->Text = L"Добавить новый";
-			this->btnAdd->UseVisualStyleBackColor = true;
+			this->btnChange->Location = System::Drawing::Point(16, 121);
+			this->btnChange->Name = L"btnChange";
+			this->btnChange->Size = System::Drawing::Size(102, 23);
+			this->btnChange->TabIndex = 0;
+			this->btnChange->Text = L"Изменить";
+			this->btnChange->UseVisualStyleBackColor = true;
 			// 
 			// lblShowAdd
 			// 
@@ -345,6 +322,7 @@ namespace TimerNoot {
 			this->lblShowAdd->Size = System::Drawing::Size(36, 21);
 			this->lblShowAdd->TabIndex = 11;
 			this->lblShowAdd->Text = L">>";
+			this->lblShowAdd->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::lblShowAdd_MouseClick);
 			// 
 			// MyForm
 			// 
@@ -410,6 +388,8 @@ private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) 
 
 		TimerSec->Interval = 1000;
 		TimerSet->Interval = 1000; // Установленное время
+
+		txtNameTimer->MaxLength = 40;
 	}
 	
 private: System::Void TimerSec_Tick(System::Object^ sender, System::EventArgs^ e) 
@@ -532,22 +512,23 @@ private: System::Void btnStop_Click(System::Object^ sender, System::EventArgs^ e
 
 private: System::Void listView1_MouseDoubleClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) 
 {
-	this->ClientSize=System::Drawing::Size(650,305); // Меням форму для добавления таймера
+	this->ClientSize=System::Drawing::Size(650,330); // Меням форму для добавления таймера
 	panel1->Visible = true;
 }// END ListView1 Mousedoubleclick
-
-private: System::Void lblHideAdd_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	lblHideAdd->ForeColor = System::Drawing::Color::Green;
-}// END MouseMove lblHideAdd
-
-
-private: System::Void lblHideAdd_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
-	lblHideAdd->ForeColor = System::Drawing::Color::Blue;
-} //End MouseLeave Покидает label
 
 
 private: System::Void lblHideAdd_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 	this->ClientSize = System::Drawing::Size(340,305);
 }// END LblHideAdd
+
+private: System::Void lblShowAdd_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	
+	(this->ClientSize.Width == 340) ?
+		this->ClientSize = System::Drawing::Size(650, 330) :
+		this->ClientSize = System::Drawing::Size(340, 330);
+	panel1->Visible = (this->ClientSize.Width == 650) ? true : false; // видимость панели
+	(panel1->Visible == true) ? lblShowAdd->Text = "<<" : lblShowAdd->Text = ">>"; // Изменение label
+}// ----------------- End lblshowAdd Mouseclick ------------------------
+
 };
 }
