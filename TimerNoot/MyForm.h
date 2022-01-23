@@ -66,6 +66,7 @@ namespace TimerNoot {
 	private: System::Windows::Forms::Label^ lblSetTimer;
 	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox2;
 	private: System::Windows::Forms::Label^ lblNameTimer;
+	private: System::Windows::Forms::Label^ lblShowAdd;
 
 
 
@@ -108,6 +109,7 @@ namespace TimerNoot {
 			this->lblSetTimer = (gcnew System::Windows::Forms::Label());
 			this->maskedTextBox2 = (gcnew System::Windows::Forms::MaskedTextBox());
 			this->btnAdd = (gcnew System::Windows::Forms::Button());
+			this->lblShowAdd = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -234,7 +236,7 @@ namespace TimerNoot {
 			this->listView1->Location = System::Drawing::Point(12, 119);
 			this->listView1->Name = L"listView1";
 			this->listView1->ShowGroups = false;
-			this->listView1->Size = System::Drawing::Size(314, 179);
+			this->listView1->Size = System::Drawing::Size(314, 185);
 			this->listView1->TabIndex = 9;
 			this->listView1->UseCompatibleStateImageBehavior = false;
 			this->listView1->View = System::Windows::Forms::View::Details;
@@ -261,9 +263,9 @@ namespace TimerNoot {
 			this->panel1->Controls->Add(this->lblHideAdd);
 			this->panel1->Controls->Add(this->maskedTextBox1);
 			this->panel1->Controls->Add(this->btnChange);
-			this->panel1->Location = System::Drawing::Point(344, 12);
+			this->panel1->Location = System::Drawing::Point(347, 12);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(285, 286);
+			this->panel1->Size = System::Drawing::Size(285, 325);
 			this->panel1->TabIndex = 10;
 			this->panel1->Visible = false;
 			// 
@@ -273,7 +275,7 @@ namespace TimerNoot {
 			this->lblHideAdd->Font = (gcnew System::Drawing::Font(L"Elephant", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblHideAdd->ForeColor = System::Drawing::Color::Blue;
-			this->lblHideAdd->Location = System::Drawing::Point(177, 259);
+			this->lblHideAdd->Location = System::Drawing::Point(177, 295);
 			this->lblHideAdd->Name = L"lblHideAdd";
 			this->lblHideAdd->Size = System::Drawing::Size(101, 21);
 			this->lblHideAdd->TabIndex = 2;
@@ -332,12 +334,25 @@ namespace TimerNoot {
 			this->btnAdd->Text = L"Добавить новый";
 			this->btnAdd->UseVisualStyleBackColor = true;
 			// 
+			// lblShowAdd
+			// 
+			this->lblShowAdd->AutoSize = true;
+			this->lblShowAdd->Font = (gcnew System::Drawing::Font(L"Elephant", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblShowAdd->ForeColor = System::Drawing::Color::Blue;
+			this->lblShowAdd->Location = System::Drawing::Point(290, 307);
+			this->lblShowAdd->Name = L"lblShowAdd";
+			this->lblShowAdd->Size = System::Drawing::Size(36, 21);
+			this->lblShowAdd->TabIndex = 11;
+			this->lblShowAdd->Text = L">>";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Info;
-			this->ClientSize = System::Drawing::Size(649, 315);
+			this->ClientSize = System::Drawing::Size(639, 342);
+			this->Controls->Add(this->lblShowAdd);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->listView1);
 			this->Controls->Add(this->btnStop);
