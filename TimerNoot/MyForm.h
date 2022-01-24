@@ -69,6 +69,9 @@ namespace TimerNoot {
 	private: System::Windows::Forms::Label^ lblNameTimer;
 	private: System::Windows::Forms::Label^ lblShowAdd;
 	private: System::Windows::Forms::TextBox^ txtNameTimer;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::MaskedTextBox^ maskedTextBox1;
+	private: System::Windows::Forms::Label^ lbl3;
 
 
 
@@ -105,6 +108,9 @@ namespace TimerNoot {
 			this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader2 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->lbl3 = (gcnew System::Windows::Forms::Label());
+			this->maskedTextBox1 = (gcnew System::Windows::Forms::MaskedTextBox());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->txtNameTimer = (gcnew System::Windows::Forms::TextBox());
 			this->btnAdd = (gcnew System::Windows::Forms::Button());
 			this->lblSetTimer = (gcnew System::Windows::Forms::Label());
@@ -257,6 +263,9 @@ namespace TimerNoot {
 			// panel1
 			// 
 			this->panel1->AutoSize = true;
+			this->panel1->Controls->Add(this->lbl3);
+			this->panel1->Controls->Add(this->maskedTextBox1);
+			this->panel1->Controls->Add(this->textBox1);
 			this->panel1->Controls->Add(this->txtNameTimer);
 			this->panel1->Controls->Add(this->btnAdd);
 			this->panel1->Controls->Add(this->lblSetTimer);
@@ -264,15 +273,48 @@ namespace TimerNoot {
 			this->panel1->Controls->Add(this->btnChange);
 			this->panel1->Location = System::Drawing::Point(347, 12);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(285, 325);
+			this->panel1->Size = System::Drawing::Size(238, 325);
 			this->panel1->TabIndex = 10;
 			this->panel1->Visible = false;
+			// 
+			// lbl3
+			// 
+			this->lbl3->AutoSize = true;
+			this->lbl3->Font = (gcnew System::Drawing::Font(L"Digital-7 Mono", 26.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbl3->Location = System::Drawing::Point(16, 220);
+			this->lbl3->Name = L"lbl3";
+			this->lbl3->Size = System::Drawing::Size(111, 35);
+			this->lbl3->TabIndex = 10;
+			this->lbl3->Text = L"label3";
+			// 
+			// maskedTextBox1
+			// 
+			this->maskedTextBox1->Font = (gcnew System::Drawing::Font(L"Digital-7 Mono", 21.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->maskedTextBox1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->maskedTextBox1->Location = System::Drawing::Point(16, 159);
+			this->maskedTextBox1->Mask = L"00:00:00";
+			this->maskedTextBox1->Name = L"maskedTextBox1";
+			this->maskedTextBox1->Size = System::Drawing::Size(118, 36);
+			this->maskedTextBox1->TabIndex = 9;
+			this->maskedTextBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::maskedTextBox1_TextChanged);
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(16, 81);
+			this->textBox1->MaxLength = 20;
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(118, 20);
+			this->textBox1->TabIndex = 8;
 			// 
 			// txtNameTimer
 			// 
 			this->txtNameTimer->Location = System::Drawing::Point(16, 32);
+			this->txtNameTimer->MaxLength = 20;
 			this->txtNameTimer->Name = L"txtNameTimer";
-			this->txtNameTimer->Size = System::Drawing::Size(255, 20);
+			this->txtNameTimer->Size = System::Drawing::Size(165, 20);
 			this->txtNameTimer->TabIndex = 7;
 			// 
 			// btnAdd
@@ -329,7 +371,7 @@ namespace TimerNoot {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Info;
-			this->ClientSize = System::Drawing::Size(639, 342);
+			this->ClientSize = System::Drawing::Size(592, 342);
 			this->Controls->Add(this->lblShowAdd);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->listView1);
@@ -390,6 +432,7 @@ private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) 
 		TimerSet->Interval = 1000; // Установленное время
 
 		txtNameTimer->MaxLength = 40;
+		
 	}
 	
 private: System::Void TimerSec_Tick(System::Object^ sender, System::EventArgs^ e) 
@@ -524,11 +567,27 @@ private: System::Void lblHideAdd_MouseClick(System::Object^ sender, System::Wind
 private: System::Void lblShowAdd_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 	
 	(this->ClientSize.Width == 340) ?
-		this->ClientSize = System::Drawing::Size(650, 330) :
+		this->ClientSize = System::Drawing::Size(608, 330) :
 		this->ClientSize = System::Drawing::Size(340, 330);
-	panel1->Visible = (this->ClientSize.Width == 650) ? true : false; // видимость панели
+	panel1->Visible = (this->ClientSize.Width == 608) ? true : false; // видимость панели
 	(panel1->Visible == true) ? lblShowAdd->Text = "<<" : lblShowAdd->Text = ">>"; // Изменение label
 }// ----------------- End lblshowAdd Mouseclick ------------------------
 
+
+private: System::Void maskedTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	
+	/*maskedTextBox1->CutCopyMaskFormat ;
+	maskedTextBox1->TextMaskFormat ;*/
+	maskedTextBox1->TextMaskFormat = System::Windows::Forms::MaskFormat::IncludePrompt;
+	lbl3->Text= maskedTextBox1->TextMaskFormat.ToString();
+	lbl3->Text = maskedTextBox1->Text[1].ToString();
+	//lbl3->Text=maskedTextBox1->Controls->ToString();
+
+	//lblShowAdd->Text = maskedTextBox1->Text;
+		//lblShowAdd->Text=(maskedTextBox1->Text == "11:11:") ? true.ToString() : false.ToString();
+	lblShowAdd->Text=(maskedTextBox1->Text == "  :  :00") ? true.ToString() : false.ToString();
+	
+
+}//----------------End MaskTextBox1_TextChange----------------
 };
 }
